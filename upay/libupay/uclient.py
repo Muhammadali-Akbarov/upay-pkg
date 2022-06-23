@@ -4,6 +4,10 @@ from zeep.client import Client
 from django.conf import settings
 
 from upay.libupay.types import RegCardRequest
+from upay.libupay.types import CreateHoldRequest
+from upay.libupay.types import PayHoldRequest
+from upay.libupay.types import CheckHoldRequest
+from upay.libupay.types import CancelHoldRequest
 
 
 class UpayClient:
@@ -31,6 +35,35 @@ class UpayClient:
         resp = self.__base_client.service.partnerRegisterCardIPS(req)
         
         return helpers.serialize_object(resp)
+
+    def hold_create(self, **kwargs):
+        req = CreateHoldRequest(**kwargs).with_access_token(
+                **self.__configs).to_dict()
+        resp = self.__base_client.service.partnerHoldCreateIPS(req)
+
+        return helpers.serialize_object(resp)
+    
+    def pay_hold(self, **kwargs):
+        req = PayHoldRequest(**kwargs).with_access_token(
+            **self.__configs).to_dict()
+        resp = self.__base_client.service.partnerHoldPaymentIPS(req)
+        
+        return helpers.serialize_object(resp)
+
+    def check_hold(self, **kwargs):
+        req = CheckHoldRequest(**kwargs).with_access_token(
+            **self.__configs).to_dict()
+
+        resp = self.__base_client.service.partnerHoldCheckIPS(req)
+        return helpers.serialize_object(resp)
+
+    def cancel_hold(self, **kwargs):
+        req = CancelHoldRequest(**kwargs).with_access_token(
+                **self.__configs).to_dict()
+        resp = self.__base_client.service.partnerHoldCheckIPS(req)
+        
+        return helpers.serialize_object(resp)
+
 
 upay_client = UpayClient(
     **settings.UPAY_SERVICE.get('uclient')

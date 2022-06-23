@@ -18,13 +18,13 @@ class UpayClientTestCase(TestCase):
     def setUp(self) -> None:
         self.test_card: dict = {**settings.UPAY_SERVICE.get('test_cards')}
         self.upay_client: object = UpayClient(**settings.UPAY_SERVICE.get('uclient_test'))
-
+    
         self.path_list = {
             'reg-card': 'http://localhost:8000/v1/reg-card/',   
         }
         
         self.client = RequestsClient()    
-
+    
         
     def test_reg_card(self) -> None:
         self.test_card['client_id'] = randint(1, 99)

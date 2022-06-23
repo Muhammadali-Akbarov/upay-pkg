@@ -6,21 +6,20 @@ from dataclasses import dataclass
 @dataclass
 class RegCardRequest:
     card_cvv: str
-    client_id: str
     card_number: str
     card_exp_date: str
     card_holder_name: str
     holder_phone_number: str
     
-    version: str = "1"
+    version: str = 1
     api_key: str = None
     notify_url: str = None
     access_token: str = None
-
+    
     def with_access_token(self, username, password, api_key, notify_url):
         """AccessToken generator MD5(username+CardNumber+CardExDate+CardCVV+password)"""
         self.api_key = api_key
-        self.notify_url = "https://muhammadali.uz/"
+        self.notify_url = notify_url
         self.access_token = md5(
             f"{username}{self.card_number}{self.card_exp_date}{self.card_cvv}{password}"
             .encode("utf-8")).hexdigest()
@@ -43,10 +42,8 @@ class RegCardRequest:
 
 
 @dataclass
-class MakeHoldRequest:
+class CreateHoldRequest:
     amount: int
-    card_id: str
-    order_id: str
     card_token: str
 
     api_key: str = None
@@ -64,11 +61,11 @@ class MakeHoldRequest:
         self.hold_minute = 60
         self.api_key = api_key
         self.personal_account = "907377447"
-        self.notify_url = notify_url.get('make_hold')
+        self.notify_url = None
         self.access_token = md5(
             f"{username}{self.card_token}{self.service_id}{self.personal_account}{self.amount}{password}"
             .encode("utf-8")).hexdigest()
-
+    
         return self
 
     def to_dict(self):
@@ -89,10 +86,9 @@ class MakeHoldRequest:
 
 
 @dataclass
-class ConfirmHoldRequest:
+class PayHoldRequest:
     amount: int
     hold_id: str
-    order_id: int
 
     trx_id: str = None
     api_key: str = None
@@ -125,7 +121,6 @@ class ConfirmHoldRequest:
 class CheckHoldRequest:
     _type: str
     target: str
-    order_id: int
 
     api_key: str = None
     access_token: str = None
