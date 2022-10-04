@@ -25,4 +25,4 @@ class CheckHoldSerializer(serializers.Serializer):
 
 
 class CancelHoldSerializer(serializers.Serializer):
-     hold_id = serializers.IntegerField(required=True)
+    hold_id = serializers.IntegerField(required=True)
