@@ -5,7 +5,7 @@
 
 
 # Overview 
-* 1 - clone repo https://github.com/Muhammadali-Akbarov/upay-visa.git
+* 1 - clone repo https://github.com/Muhammadali-Akbarov/upay-pkg.git
 *  - add this app into your django project
 *  - install all requirements packages
 
