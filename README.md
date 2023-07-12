@@ -3,7 +3,7 @@
 <img src="https://play-lh.googleusercontent.com/56kMB0zuF9jXwKDjWSYgVffMOG8ZuvAz34kSovlZ32zJBhRbIhNbW8Me_wRw7xRYhVE">
 
 
-
+Support Group - https://t.me/+Ng1axYLNyBAyYTRi 
 # Overview 
 * 1 - clone repo https://github.com/Muhammadali-Akbarov/upay-pkg.git
 *  - add this app into your django project
